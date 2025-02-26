@@ -105,14 +105,14 @@ if __name__ == "__main__":
     
     # Require at least 1 GB of data per day
     min_data_constraint = MinConstellationDataDownlinkConstraint(
-        value=1e4,  # 1 GB in bits
+        value=1e2,  # 1 GB in bits
         period=86400.0,  # One day in seconds
-        step=360.0  # Check every hour
+        step=60.0  # Check every hour
     )
     optimizer.add_constraint(min_data_constraint)
     
     # Set objective and solve
-    optimizer.set_objective(MinCostObjective())
+    optimizer.set_objective(MaxDataDownlinkObjective())
     optimizer.solve()
     
     print(optimizer)
